@@ -1,23 +1,26 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import './App.css';
+import Pokemon from './components/Pokemon.js';
+import DetailPage from './DetailPage.js';
 
 function App() {
+
+  const [pokemonIds, setPokemonIds] = useState([]);
+
+  useEffect(() => {
+    setPokemonIds([1,2,3,4,5,6,7,8,9]);
+  },[]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <div className="App">
+        {pokemonIds.map((pokemonId, index) => (
+          <Link to={`/detail-page/${pokemonId}`}>
+            <Pokemon idPokemon={pokemonId} key={pokemonId}></Pokemon>
+          </Link>
+        ))}
+        </div>
     </div>
   );
 }
